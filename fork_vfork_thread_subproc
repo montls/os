@@ -1,0 +1,58 @@
+/*
+*********************************************************************************************************
+* Project/File  :  change.c
+* By            :  王言娟
+* By            :  张俊遥
+* Mail          : 1490299172@qq.com 
+* Status        :  finished
+* Version       :  2.0
+* Created Time  :  2014年09月23日 星期二 12时10分50秒
+* 
+*********************************************************************************************************
+* Note:
+*
+*********************************************************************************************************
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<unistd.h>
+#include<ctype.h>
+#include<sys/types.h>
+
+int main(int argc, char *argv[])
+{
+	FILE *fp[2];
+	char c;
+	int i;
+
+	//debug
+	printf("argc: %d\n", argc);
+	for (i=0; i<argc; i++) {
+		printf("argv[%d]: %s\n", i, argv[i]);	
+		
+	}
+
+	for(i=0;i<2;i++)
+	{
+		if((fp[i]=fopen(argv[i],"r+"))==NULL)
+		{
+			printf("cannot open this file\n");
+			exit(0);
+		}
+		else
+		{
+			while((c=fgetc(fp[i]))!=EOF)
+			{
+				if('a'<=c&&c<='z')
+				{
+					printf("%c",toupper(c));
+				}
+			}
+		}
+		printf("\n");
+	}
+	fclose(fp[0]);
+	fclose(fp[1]);
+}
